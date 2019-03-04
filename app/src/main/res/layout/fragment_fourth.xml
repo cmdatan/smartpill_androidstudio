@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#673AB7"
+    tools:context=".fourthFrag">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="350dp"
+        android:fontFamily="@font/product_sans"
+        android:text="Automatic Reminder"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="400dp"
+        android:text="The Smart Pill Dispenser will remind you when it's time to take which medicine according to schedule."
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/next_frag"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="138dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="550dp"
+        android:backgroundTint="@color/design_default_color_primary_dark"
+
+        android:backgroundTintMode="src_over"
+        android:elevation="100dp"
+        android:text="get started"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@color/colorWhite" />
+
+</FrameLayout>
