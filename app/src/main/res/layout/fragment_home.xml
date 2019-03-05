@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="0dp"
@@ -18,9 +19,9 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="82dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_vertical"
         android:fontFamily="@font/product_sans"
         android:text="Smart Pill Dispenser"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -29,33 +30,14 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center_vertical"
         android:text="A smarter way to schedule taking your medicine."
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@color/colorWhite"
         android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/next_frag"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="290dp"
-        android:layout_marginTop="600dp"
-        android:text="next"
-        android:textColor="@color/colorWhite" />
-
-    <Button
-        android:id="@+id/skip_intro"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="600dp"
-        android:text="skip"
-        android:textColor="@color/colorWhite" />
 
 </FrameLayout>
