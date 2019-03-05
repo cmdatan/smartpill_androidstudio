@@ -22,4 +22,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_signup">Sign Up</string>
     <string name="title_activity_login2">Sign in</string>
+    <string name="title_activity_intro">intro</string>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartpill">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -15,13 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".intro"
+            android:label="@string/title_activity_intro"></activity>
+        <activity
             android:name=".signupActivity"
-            android:label="@string/title_activity_signup"></activity>
+            android:label="@string/title_activity_signup" />
         <activity
             android:name=".homeActivity"
-            android:label="Smart Pill"
-            />
-
+            android:label="Smart Pill" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />

@@ -40,5 +40,4 @@ public class homeFrag extends Fragment {
         ((MainActivity)getActivity()).updateStatusBarColor("#3F51B5");
     }
 
-
 }
