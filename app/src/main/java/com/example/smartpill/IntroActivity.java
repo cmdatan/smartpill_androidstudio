@@ -3,7 +3,10 @@ package com.example.smartpill;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
@@ -50,6 +53,12 @@ public class IntroActivity extends AppIntro2 {
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(false);
         setVibrateIntensity(30);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#000000"));
+        }
     }
 
     @Override
