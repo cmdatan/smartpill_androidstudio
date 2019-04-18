@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,6 +45,21 @@ public class addScheduleActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, medicineSpinner);
         medadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         smed.setAdapter(medadapter);
+
+        Button mBack = (Button) findViewById(R.id.back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(addScheduleActivity.this, homeActivity.class));;
+            }
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#FF424242"));
+        }
+
     }
 
 }
