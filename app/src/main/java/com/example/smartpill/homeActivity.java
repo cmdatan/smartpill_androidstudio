@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
@@ -18,9 +19,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class homeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class homeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,16 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
-
+        Button btn = (Button) findViewById(R.id.menu);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(homeActivity.this, v);
+                popup.setOnMenuItemClickListener(homeActivity.this);
+                popup.inflate(R.menu.menu);
+                popup.show();
+            }
+        });
 
     }
 
@@ -78,6 +90,24 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
         }
 
         return loadFragment(fragment);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.connect:
+                // do your code
+                return true;
+            case R.id.logout:
+                // do your code
+                return true;
+            case R.id.settings:
+                // do your code
+                return true;
+            default:
+                return false;
+        }
     }
 
 }
