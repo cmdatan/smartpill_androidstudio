@@ -84,12 +84,13 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="158dp"
                 android:layout_height="58dp"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/design_default_color_primary_dark"
+                android:backgroundTint="@color/colorBackground"
                 android:text="login"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold" />
 
             <TextView
@@ -108,7 +109,7 @@
                 android:layout_height="58dp"
                 android:baselineAligned="false"
                 android:text="sign up"
-                android:textColor="@color/design_default_color_primary_dark" />
+                android:textColor="@color/colorPrimary" />
 
 
         </LinearLayout>

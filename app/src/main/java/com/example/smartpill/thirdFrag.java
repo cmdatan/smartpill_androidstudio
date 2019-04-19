@@ -28,6 +28,5 @@ public class thirdFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //view.findViewById(R.id.next_frag).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action));
         //view.findViewById(R.id.skip_intro).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.loginActivity));
-        ((MainActivity)getActivity()).updateStatusBarColor("#FF6E40");
     }
 }

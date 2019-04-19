@@ -53,12 +53,6 @@ public class IntroActivity extends AppIntro2 {
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
         setVibrate(false);
         setVibrateIntensity(30);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#000000"));
-        }
     }
 
     @Override

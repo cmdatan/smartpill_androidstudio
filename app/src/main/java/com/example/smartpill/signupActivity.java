@@ -99,12 +99,6 @@ public class signupActivity extends AppCompatActivity implements LoaderCallbacks
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#303F9F"));
-        }
-
         //pressing sign up button
         Button mSigninButton = (Button) findViewById(R.id.goto_signin);
         mSigninButton.setOnClickListener(new OnClickListener() {
