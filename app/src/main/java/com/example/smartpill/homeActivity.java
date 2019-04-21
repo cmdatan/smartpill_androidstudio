@@ -6,13 +6,19 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
+import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +29,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class homeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener {
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+    public WordViewModel mWordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Stetho.initializeWithDefaults(this);
 
         loadFragment(new dashboardFrag());
 
@@ -37,12 +48,13 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
         FloatingActionButton mFloatingAction = (FloatingActionButton) findViewById(R.id.floating_action_button);
         mFloatingAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(homeActivity.this, addScheduleActivity.class));;
+                Intent intent = new Intent(homeActivity.this, addScheduleActivity.class);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -56,7 +68,6 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                 popup.show();
             }
         });
-
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -107,6 +118,38 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Word word = new Word(data.getStringExtra(addScheduleActivity.MEDICINE),
+                    data.getStringExtra(addScheduleActivity.QUANTITY),
+                    data.getIntExtra(addScheduleActivity.DURATION,0),
+                    data.getIntExtra(addScheduleActivity.HOUR,0),
+                    data.getIntExtra(addScheduleActivity.MINUTE,0),
+                    data.getIntExtra(addScheduleActivity.MON,0),
+                    data.getIntExtra(addScheduleActivity.TUES,0),
+                    data.getIntExtra(addScheduleActivity.WEDNES,0),
+                    data.getIntExtra(addScheduleActivity.THURS,0),
+                    data.getIntExtra(addScheduleActivity.FRI,0),
+                    data.getIntExtra(addScheduleActivity.SATUR,0),
+                    data.getIntExtra(addScheduleActivity.SUN,0));
+            if (word != null){
+                mWordViewModel.insert(word);
+            }
+
+            /*Toast.makeText(
+                    this.getApplicationContext(),
+                    "Saved.",
+                    Toast.LENGTH_LONG).show();*/
+        } else {
+            Toast.makeText(
+                    this.getApplicationContext(),
+                    "Cancelled.",
+                    Toast.LENGTH_LONG).show();
         }
     }
 

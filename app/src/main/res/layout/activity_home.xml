@@ -51,7 +51,7 @@
         android:shadowDy="0"
         android:shadowRadius="0"
         app:cornerRadius="200dp"
-        app:icon="@drawable/round_menu_black_36dp"
+        app:icon="@drawable/round_more_vert_black_48dp"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="30dp"
