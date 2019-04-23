@@ -22,7 +22,7 @@ public class popupActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*0.9),(int)(height*.6));
+        getWindow().setLayout((int)(width*0.9),(int)(height*.62));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -30,6 +30,7 @@ public class popupActivity extends AppCompatActivity {
         params.y = 0;
 
         getWindow().setAttributes(params);
+
 
     }
 }
