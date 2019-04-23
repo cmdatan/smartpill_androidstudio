@@ -15,8 +15,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
     
-    <style name="AppTheme.popup" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
+    <style name="PopupTheme" parent="Theme.MaterialComponents.Light.Dialog">
+
     </style>
 </resources>
