@@ -2,6 +2,7 @@ package com.example.smartpill;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,18 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     class WordViewHolder extends RecyclerView.ViewHolder {
         private final TextView time, medicine, quantity;
 
-        private WordViewHolder(View itemView) {
+        private WordViewHolder(final View itemView) {
             super(itemView);
             time = itemView.findViewById(R.id.time);
             medicine = itemView.findViewById(R.id.medicine);
             quantity = itemView.findViewById(R.id.quantity);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view){
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), popupActivity.class));
+                }
+            });
         }
     }
 

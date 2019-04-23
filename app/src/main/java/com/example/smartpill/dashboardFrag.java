@@ -23,7 +23,6 @@ public class dashboardFrag extends Fragment {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
     private WordViewModel mWordViewModel;
-
     @Nullable
     @Override
 
@@ -50,6 +49,7 @@ public class dashboardFrag extends Fragment {
                 adapter.setWords(words);
             }
         });
+
     }
 
 }
