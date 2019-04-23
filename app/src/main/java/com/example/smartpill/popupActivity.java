@@ -30,7 +30,5 @@ public class popupActivity extends AppCompatActivity {
         params.y = 0;
 
         getWindow().setAttributes(params);
-
-
     }
 }
