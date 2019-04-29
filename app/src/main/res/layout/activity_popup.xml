@@ -237,7 +237,7 @@
             app:uncheckedColor="@color/colorBackground" />
 
         <me.rishabhkhanna.customtogglebutton.CustomToggleButton
-            android:id="@+id/sat"
+            android:id="@+id/popup_sat"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"

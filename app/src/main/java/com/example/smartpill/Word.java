@@ -64,6 +64,8 @@ public class Word {
         this.sat = sat;
         this.sun = sun;
     }
+    public int getSID(){return this.sid;}
+
     public String getMedicine(){return this.medicine;}
 
     public String getQuantity(){return this.quantity;}
