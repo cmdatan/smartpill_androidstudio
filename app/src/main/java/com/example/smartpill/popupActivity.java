@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.rishabhkhanna.customtogglebutton.CustomToggleButton;
 
 public class popupActivity extends AppCompatActivity {
+    private Button btn_delete;
+    int SID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +39,13 @@ public class popupActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
         getIncomingIntent();
+
+
     }
 
     private void getIncomingIntent() {
         if(getIntent().hasExtra("SID")) {
-            int SID = getIntent().getIntExtra("SID", 0);
+            SID = getIntent().getIntExtra("SID", 0);
             String medicine = getIntent().getStringExtra("medicine");
             String quantity = getIntent().getStringExtra("quantity");
             Integer hour = getIntent().getIntExtra("hour", 0);

@@ -90,4 +90,8 @@ public class Word {
 
     public Integer getSun(){return this.sun;}
 
+    public void setSID(int sid) {
+        this.sid = sid;
+    }
+
 }
