@@ -34,6 +34,9 @@ import java.util.List;
 public class homeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
+    public static homeActivity instance;
+    public boolean connected;
+
     public WordViewModel mWordViewModel;
 
     @Override
@@ -41,6 +44,9 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Stetho.initializeWithDefaults(this);
+
+        instance = this;
+        connected = false;
 
         loadFragment(new dashboardFrag());
 
@@ -105,10 +111,10 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.connect:
-                // do your code
+                ((btMaster) getApplicationContext()).pairDevice(item);
                 return true;
             case R.id.logout:
                 // do your code
@@ -139,6 +145,29 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                     data.getIntExtra(addScheduleActivity.SUN,0));
             if (word != null){
                 mWordViewModel.insert(word);
+
+                if(((btMaster) getApplicationContext()).mConnectedThread != null) { //First check to make sure thread created
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.DURATION,0)));      //boxNo
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.MON,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.TUES,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.WEDNES,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.THURS,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.FRI,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.SATUR,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.SUN,0)));      //dow
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.HOUR,0)));     //hr
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("-");
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.MINUTE,0)));      //min
+                    ((btMaster) getApplicationContext()).mConnectedThread.write("#");              //end
+                }
             }
 
             /*Toast.makeText(

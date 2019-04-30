@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public interface WordDao {
     // we are notified whenever any of the database contents have changed.
     @Query("SELECT * from word_table ORDER BY hour ASC, minute ASC")
     LiveData<List<Word>> getAlphabetizedWords();
+
+    @Transaction
+    @Query("SELECT * FROM word_table")
+    List<Word> getAll();
 
     // We do not need a conflict strategy, because the word is our primary key, and you cannot
     // add two items with the same primary key to the database. If the table has more than one

@@ -15,6 +15,7 @@ import java.util.List;
 
 public class WordRepository {
 
+    private WordRoomDatabase db;
     private WordDao mWordDao;
     private LiveData<List<Word>> mAllWords;
 
@@ -22,8 +23,8 @@ public class WordRepository {
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
-    WordRepository(Application application) {
-        WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
+    public WordRepository(Application application) {
+        db = WordRoomDatabase.getDatabase(application);
         mWordDao = db.wordDao();
         mAllWords = mWordDao.getAlphabetizedWords();
     }
@@ -33,6 +34,11 @@ public class WordRepository {
     LiveData<List<Word>> getAllWords() {
         return mAllWords;
     }
+
+    List<Word> getWordsComplete() {
+        return db.wordDao().getAll();
+    }
+
 
     // You must call this on a non-UI thread or your app will crash.
     // Like this, Room ensures that you're not doing any long running operations on the main
