@@ -39,8 +39,6 @@ public class popupActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
         getIncomingIntent();
-
-
     }
 
     private void getIncomingIntent() {
