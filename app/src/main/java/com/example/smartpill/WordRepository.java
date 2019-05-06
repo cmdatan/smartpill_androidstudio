@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
 
 public class WordRepository {
 
-    private WordRoomDatabase db;
-    private WordDao mWordDao;
-    private LiveData<List<Word>> mAllWords;
+    public WordRoomDatabase db;
+    public WordDao mWordDao;
+    public LiveData<List<Word>> mAllWords;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -39,6 +40,27 @@ public class WordRepository {
         return db.wordDao().getAll();
     }
 
+    Word getWordDB(int sid) {
+        return db.wordDao().getWord(sid);
+    }
+
+    public void deleteWord(Word word)  {
+        new deleteWordAsyncTask(mWordDao).execute(word);
+    }
+
+    private static class deleteWordAsyncTask extends AsyncTask<Word, Void, Void> {
+        private WordDao mAsyncTaskDao;
+
+        deleteWordAsyncTask(WordDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Word... params) {
+            mAsyncTaskDao.deleteWord(params[0]);
+            return null;
+        }
+    }
 
     // You must call this on a non-UI thread or your app will crash.
     // Like this, Room ensures that you're not doing any long running operations on the main
@@ -58,6 +80,24 @@ public class WordRepository {
         @Override
         protected Void doInBackground(final Word... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    public void update(Word word)  {
+        new updateWordAsyncTask(mWordDao).execute(word);
+    }
+
+    private static class updateWordAsyncTask extends AsyncTask<Word, Void, Void> {
+        private WordDao mAsyncTaskDao;
+
+        updateWordAsyncTask(WordDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Word... params) {
+            mAsyncTaskDao.update(params[0]);
             return null;
         }
     }

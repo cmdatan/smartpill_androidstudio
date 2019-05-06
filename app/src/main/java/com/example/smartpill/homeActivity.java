@@ -17,6 +17,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ import java.util.List;
 
 public class homeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, PopupMenu.OnMenuItemClickListener {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_ACTIVITY_REQUEST_CODE = 2;
 
     public static homeActivity instance;
     public boolean connected;
@@ -74,6 +76,7 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                 popup.show();
             }
         });
+
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -147,7 +150,19 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                 mWordViewModel.insert(word);
 
                 if(((btMaster) getApplicationContext()).mConnectedThread != null) { //First check to make sure thread created
-                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.DURATION,0)));      //boxNo
+                    String meds = (data.getStringExtra(popupActivity.MEDICINE));    Integer boxNo;
+
+                    if (meds.equals("Paracetamol")) {
+                        boxNo = 0;
+                    } else if (meds.equals("Cefalexin")) {
+                        boxNo = 1;
+                    } else if (meds.equals("Amoxicillin")) {
+                        boxNo = 2;
+                    } else {
+                        boxNo = 3;
+                    }
+
+                    ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(boxNo));      //boxNo
                     ((btMaster) getApplicationContext()).mConnectedThread.write("-");
                     ((btMaster) getApplicationContext()).mConnectedThread.write(String.valueOf(data.getIntExtra(addScheduleActivity.MON,0)));      //dow
                     ((btMaster) getApplicationContext()).mConnectedThread.write("-");
@@ -169,19 +184,8 @@ public class homeActivity extends AppCompatActivity implements BottomNavigationV
                     ((btMaster) getApplicationContext()).mConnectedThread.write("#");              //end
                 }
             }
-
-            /*Toast.makeText(
-                    this.getApplicationContext(),
-                    "Saved.",
-                    Toast.LENGTH_LONG).show();*/
-        } else {
-            Toast.makeText(
-                    this.getApplicationContext(),
-                    "Cancelled.",
-                    Toast.LENGTH_LONG).show();
         }
     }
-
 }
 
 

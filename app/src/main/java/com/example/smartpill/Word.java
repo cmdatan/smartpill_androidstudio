@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "word_table")
@@ -64,6 +65,8 @@ public class Word {
         this.sat = sat;
         this.sun = sun;
     }
+
+
     public int getSID(){return this.sid;}
 
     public String getMedicine(){return this.medicine;}
@@ -90,7 +93,32 @@ public class Word {
 
     public Integer getSun(){return this.sun;}
 
-    public void setSID(int sid) {
+    @Ignore
+    public Word(int sid, @NonNull String medicine, @Nullable String quantity, @NonNull Integer duration, @Nullable Integer hour, @Nullable Integer minute,
+                @NonNull Integer mon, @NonNull Integer tue, @NonNull Integer wed, @NonNull Integer thurs,
+                @NonNull Integer fri, @NonNull Integer sat, @NonNull Integer sun) {
+        this.sid = sid;
+        this.medicine = medicine;
+        this.quantity = quantity;
+        this.duration = duration;
+        this.hour = hour;
+        this.minute = minute;
+        this.mon = mon;
+        this.tue = tue;
+        this.wed = wed;
+        this.thurs = thurs;
+        this.fri = fri;
+        this.sat = sat;
+        this.sun = sun;
+    }
+
+    //public String getWord() {
+    //    return this.mWord;
+    //}
+
+    //public int getSid() {return sid;}
+
+    public void setId(int sid) {
         this.sid = sid;
     }
 

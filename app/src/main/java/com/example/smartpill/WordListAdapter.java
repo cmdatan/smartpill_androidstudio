@@ -29,11 +29,18 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             quantity = itemView.findViewById(R.id.quantity);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
         }
     }
 
     private final LayoutInflater mInflater;
     private List<Word> mWords; // Cached copy of words
+    private static ClickListener clickListener;
     private Context mContext;
 
     WordListAdapter(Context context) {
@@ -51,32 +58,14 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public void onBindViewHolder(WordViewHolder holder, int position) {
         String colon;
         final Word current = mWords.get(position);
-        /*
-        if (current.getMinute() < 10){
-            colon = ":0";
-        }
-        else{
-            colon = ":";
-        }
-        if (current.getHour() > 12){
-            holder.time.setText(current.getHour() - 12 + colon + current.getMinute() + " PM");
-        }
-        else if (current.getHour() == 12){
-            holder.time.setText(current.getHour() + colon + current.getMinute() + " PM");
-        }
-        else if (current.getHour() == 0){
-            holder.time.setText("12" + colon + current.getMinute() + " AM");
-        }
-        else{
-            holder.time.setText(current.getHour()+ colon + current.getMinute()+ " AM");
-        }*/
+
         String timer = String.format("%02d:%02d %s",current.getHour() == 0 || current.getHour() == 12 ? 12 : current.getHour()%12,
                 current.getMinute(),current.getHour() > 11 ? "PM" : "AM");
 
         holder.medicine.setText(current.getMedicine());
         holder.quantity.setText("Take " + current.getQuantity());
         holder.time.setText(timer);
-
+        /*
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -98,6 +87,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
                 mContext.startActivity(intent);
             }
         });
+        */
     }
 
     void setWords(List<Word> words){
@@ -113,7 +103,41 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             return mWords.size();
         else return 0;
     }
+
+    public Word getWordAtPosition (int position) {
+        return mWords.get(position);
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        WordListAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(View v, int position);
+    }
+
+
+
 }
 
 
+/*
+        if (current.getMinute() < 10){
+            colon = ":0";
+        }
+        else{
+            colon = ":";
+        }
+        if (current.getHour() > 12){
+            holder.time.setText(current.getHour() - 12 + colon + current.getMinute() + " PM");
+        }
+        else if (current.getHour() == 12){
+            holder.time.setText(current.getHour() + colon + current.getMinute() + " PM");
+        }
+        else if (current.getHour() == 0){
+            holder.time.setText("12" + colon + current.getMinute() + " AM");
+        }
+        else{
+            holder.time.setText(current.getHour()+ colon + current.getMinute()+ " AM");
+        }*/
 

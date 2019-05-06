@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -40,8 +41,24 @@ public class addScheduleActivity extends AppCompatActivity {
     public static final String SUN = "sunday";
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_ACTIVITY_REQUEST_CODE = 2;
 
     private WordViewModel mWordViewModel;
+
+    int position;
+    int SID;
+    String medicine;
+    String quantity;
+    Integer duration;
+    Integer hour;
+    Integer minute;
+    Integer mon;
+    Integer tues;
+    Integer wed;
+    Integer thurs;
+    Integer fri;
+    Integer sat;
+    Integer sun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +74,9 @@ public class addScheduleActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
         */
+
+        TextView topText = (TextView) findViewById(R.id.textView4);
+
         String[] medicineSpinner = new String[] {
                 "Paracetamol", "Cefalexin", "Amoxicillin", "Abacavir"
         };
@@ -93,6 +113,36 @@ public class addScheduleActivity extends AppCompatActivity {
         mQuantity = (EditText) findViewById(R.id.text_quantity);
         mDuration = (EditText) findViewById(R.id.duration);
 
+        getIncomingIntent();
+
+        if (medicine != null) {
+            topText.setText("Edit Schedule");
+            int spinnerPosition = medadapter.getPosition(medicine);
+            mMedicine.setSelection(spinnerPosition);
+        } else {}
+
+        if (quantity != null) {
+            mQuantity.setText(quantity);
+        } else {}
+
+        if (quantity != null) {
+            mDuration.setText(String.valueOf(duration));
+        } else {}
+
+        if (hour != null) {
+            mTimePicker.setHour(hour);
+            mTimePicker.setMinute(minute);
+        } else {}
+
+        if (mon != null) { if (mon == 1) { mMon.setChecked(true); } else { mMon.setChecked(false); } } else {}
+        if (tues != null) { if (tues == 1) { mTues.setChecked(true); } else { mTues.setChecked(false); } } else {}
+        if (wed != null) { if (wed == 1) { mWed.setChecked(true); } else { mWed.setChecked(false); } } else {}
+        if (thurs != null) { if (thurs == 1) { mThurs.setChecked(true); } else { mThurs.setChecked(false); } } else {}
+        if (fri != null) { if (fri == 1) { mFri.setChecked(true); } else { mFri.setChecked(false); } } else {}
+        if (sat != null) { if (sat == 1) { mSat.setChecked(true); } else { mSat.setChecked(false); } } else {}
+        if (sun != null) { if (sun == 1) { mSun.setChecked(true); } else { mSun.setChecked(false); } } else {}
+
+
         final Button button = findViewById(R.id.btn_save);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -115,6 +165,7 @@ public class addScheduleActivity extends AppCompatActivity {
                     Integer sat = mSat.isChecked() ? 1 : 0;
                     Integer sun = mSun.isChecked() ? 1 : 0;
 
+                    replyIntent.putExtra("SID", SID);
                     replyIntent.putExtra(MEDICINE, medicine);
                     replyIntent.putExtra(QUANTITY,quantity);
                     replyIntent.putExtra(DURATION,duration);
@@ -135,6 +186,24 @@ public class addScheduleActivity extends AppCompatActivity {
         });
     }
 
+    private void getIncomingIntent() {
+        if(getIntent().hasExtra("SID")) {
+            position = getIntent().getIntExtra("position", 0);
+            SID = getIntent().getIntExtra("SID", 0);
+            medicine = getIntent().getStringExtra("medicine");
+            quantity = getIntent().getStringExtra("quantity");
+            duration = getIntent().getIntExtra("duration", 0);
+            hour = getIntent().getIntExtra("hour", 0);
+            minute = getIntent().getIntExtra("minute", 0);
+            mon = getIntent().getIntExtra("mon", 0);
+            tues = getIntent().getIntExtra("tues", 0);
+            wed = getIntent().getIntExtra("wed", 0);
+            thurs = getIntent().getIntExtra("thurs", 0);
+            fri = getIntent().getIntExtra("fri", 0);
+            sat = getIntent().getIntExtra("sat", 0);
+            sun = getIntent().getIntExtra("sun", 0);
+        }
+    }
 
 
 }

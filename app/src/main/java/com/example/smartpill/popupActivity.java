@@ -1,7 +1,9 @@
 package com.example.smartpill;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -9,14 +11,53 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.util.List;
 
 import me.rishabhkhanna.customtogglebutton.CustomToggleButton;
 
 public class popupActivity extends AppCompatActivity {
-    private Button btn_delete;
+
+    public static final String MEDICINE = "medicine";
+    public static final String QUANTITY = "quantity";
+    public static final String DURATION = "duration";
+    public static final String HOUR = "hour";
+    public static final String MINUTE = "minute";
+    public static final String MON = "monday";
+    public static final String TUES = "tuesday";
+    public static final String WEDNES = "wednesday";
+    public static final String THURS = "thursday";
+    public static final String FRI = "friday";
+    public static final String SATUR = "saturday";
+    public static final String SUN = "sunday";
+
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_ACTIVITY_REQUEST_CODE = 2;
+
+    //private Button btn_delete;
+    //private Button btn_edit;
+    int position;
     int SID;
+    String medicine;
+    String quantity;
+    Integer duration;
+    Integer hour;
+    Integer minute;
+    Integer mon;
+    Integer tues;
+    Integer wed;
+    Integer thurs;
+    Integer fri;
+    Integer sat;
+    Integer sun;
+
+    public WordViewModel mWordViewModel;
+    public List<Word> mListWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,23 +80,77 @@ public class popupActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
         getIncomingIntent();
+
+        mWordViewModel = ViewModelProviders.of(homeActivity.instance).get(WordViewModel.class);
+
+        Button btn_delete = (Button) findViewById(R.id.btn_delete);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent replyIntent = new Intent();
+                replyIntent.putExtra("update", 0);
+                replyIntent.putExtra("position", position);
+                replyIntent.putExtra(MEDICINE, medicine);
+                replyIntent.putExtra(QUANTITY,quantity);
+                replyIntent.putExtra(DURATION,duration);
+                replyIntent.putExtra(HOUR,hour);
+                replyIntent.putExtra(MINUTE,minute);
+                replyIntent.putExtra(MON,mon);
+                replyIntent.putExtra(TUES,tues);
+                replyIntent.putExtra(WEDNES,wed);
+                replyIntent.putExtra(THURS,thurs);
+                replyIntent.putExtra(FRI,fri);
+                replyIntent.putExtra(SATUR,sat);
+                replyIntent.putExtra(SUN,sun);
+                setResult(RESULT_OK, replyIntent);
+
+                finish();
+            }
+        });
+
+        Button btn_edit = (Button) findViewById(R.id.btn_edit);
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent replyIntent = new Intent();
+                replyIntent.putExtra("update", 1);
+                replyIntent.putExtra("position", position);
+                replyIntent.putExtra(MEDICINE, medicine);
+                replyIntent.putExtra(QUANTITY,quantity);
+                replyIntent.putExtra(DURATION,duration);
+                replyIntent.putExtra(HOUR,hour);
+                replyIntent.putExtra(MINUTE,minute);
+                replyIntent.putExtra(MON,mon);
+                replyIntent.putExtra(TUES,tues);
+                replyIntent.putExtra(WEDNES,wed);
+                replyIntent.putExtra(THURS,thurs);
+                replyIntent.putExtra(FRI,fri);
+                replyIntent.putExtra(SATUR,sat);
+                replyIntent.putExtra(SUN,sun);
+                setResult(RESULT_OK, replyIntent);
+
+                finish();
+            }
+        });
+
     }
 
     private void getIncomingIntent() {
         if(getIntent().hasExtra("SID")) {
+            position = getIntent().getIntExtra("position", 0);
             SID = getIntent().getIntExtra("SID", 0);
-            String medicine = getIntent().getStringExtra("medicine");
-            String quantity = getIntent().getStringExtra("quantity");
-            Integer hour = getIntent().getIntExtra("hour", 0);
-            Integer minute = getIntent().getIntExtra("minute", 0);
-            Integer mon = getIntent().getIntExtra("mon", 0);
-            Integer tues = getIntent().getIntExtra("tues", 0);
-            Integer wed = getIntent().getIntExtra("wed", 0);
-            Integer thurs = getIntent().getIntExtra("thurs", 0);
-            Integer fri = getIntent().getIntExtra("fri", 0);
-            Integer sat = getIntent().getIntExtra("sat", 0);
-            Integer sun = getIntent().getIntExtra("sun", 0);
-
+            medicine = getIntent().getStringExtra("medicine");
+            quantity = getIntent().getStringExtra("quantity");
+            duration = getIntent().getIntExtra("duration", 0);
+            hour = getIntent().getIntExtra("hour", 0);
+            minute = getIntent().getIntExtra("minute", 0);
+            mon = getIntent().getIntExtra("mon", 0);
+            tues = getIntent().getIntExtra("tues", 0);
+            wed = getIntent().getIntExtra("wed", 0);
+            thurs = getIntent().getIntExtra("thurs", 0);
+            fri = getIntent().getIntExtra("fri", 0);
+            sat = getIntent().getIntExtra("sat", 0);
+            sun = getIntent().getIntExtra("sun", 0);
 
             setPopup(SID, medicine, quantity, hour, minute, mon, tues, wed, thurs, fri, sat, sun);
         }

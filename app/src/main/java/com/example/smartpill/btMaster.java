@@ -80,6 +80,59 @@ public class btMaster extends Application {
 
     }
 
+
+    public void btSendAll() {
+        if (mConnectedThread != null) {
+            new Thread()
+            {
+                public void run() {
+                        SystemClock.sleep(300);
+                        mWordViewModel = ViewModelProviders.of(homeActivity.instance).get(WordViewModel.class);
+                        mListWords = mWordViewModel.getWordsComplete();
+
+                        mConnectedThread.write("&");
+                        String meds; Integer boxNo;
+
+                        for (Word word: mListWords) {
+                            meds = word.getMedicine();
+                            if (meds.equals("Paracetamol")) {
+                                boxNo = 0;
+                            } else if (meds.equals("Cefalexin")) {
+                                boxNo = 1;
+                            } else if (meds.equals("Amoxicillin")) {
+                                boxNo = 2;
+                            } else {
+                                boxNo = 3;
+                            }
+
+                            mConnectedThread.write(String.valueOf(boxNo));      //boxNo
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getMon()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getTue()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getWed()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getThurs()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getFri()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getSat()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getSun()));      //dow
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getHour()));     //hr
+                            mConnectedThread.write("-");
+                            mConnectedThread.write(String.valueOf(word.getMinute()));      //min
+                            mConnectedThread.write("#");              //end
+                            SystemClock.sleep(300);
+                        }
+                    }
+            }.start();
+        }
+    }
+
+
     public void pairDevice(MenuItem item){
         if(mBTAdapter.isEnabled()) {
             final String address = "20:18:08:23:44:03";
@@ -121,13 +174,25 @@ public class btMaster extends Application {
                         mConnectedThread = new btMaster.ConnectedThread(mBTSocket);
                         mConnectedThread.start();
 
-
                         mWordViewModel = ViewModelProviders.of(homeActivity.instance).get(WordViewModel.class);
                         mListWords = mWordViewModel.getWordsComplete();
 
                         mConnectedThread.write("&");
+                        String meds; Integer boxNo;
+
                         for (Word word: mListWords) {
-                            mConnectedThread.write(String.valueOf(word.getQuantity()));      //boxNo
+                            meds = word.getMedicine();
+                            if (meds.equals("Paracetamol")) {
+                                boxNo = 0;
+                            } else if (meds.equals("Cefalexin")) {
+                                boxNo = 1;
+                            } else if (meds.equals("Amoxicillin")) {
+                                boxNo = 2;
+                            } else {
+                                boxNo = 3;
+                            }
+
+                            mConnectedThread.write(String.valueOf(boxNo));      //boxNo
                             mConnectedThread.write("-");
                             mConnectedThread.write(String.valueOf(word.getMon()));      //dow
                             mConnectedThread.write("-");
@@ -274,27 +339,3 @@ public class btMaster extends Application {
 
     }
 }
-
-
-/*
-                    mConnectedThread.write(String.valueOf(word.getQuantity()));      //boxNo
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getMon()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getTue()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getWed()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getThurs()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getFri()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getSat()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getSun()));      //dow
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getHour()));     //hr
-                    mConnectedThread.write("-");
-                    mConnectedThread.write(String.valueOf(word.getMinute()));      //min
-                    mConnectedThread.write("#");              //end
- */
