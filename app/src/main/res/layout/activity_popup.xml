@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/popup_medicine"
+        android:id="@+id/popup_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -33,7 +33,7 @@
             android:layout_marginTop="9dp"
             android:src="@drawable/round_access_time_black_18dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popup_medicine" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_box" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
             android:text="Scheduled at "
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/popup_medicine" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_box" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:textSize="20sp"
             android:id="@+id/popup_time"
             app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
-            app:layout_constraintTop_toBottomOf="@+id/popup_medicine" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_box" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
     <androidx.appcompat.widget.LinearLayoutCompat

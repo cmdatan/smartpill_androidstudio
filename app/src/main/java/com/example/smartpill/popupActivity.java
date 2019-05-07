@@ -1,9 +1,7 @@
 package com.example.smartpill;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -11,10 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.List;
@@ -157,7 +153,7 @@ public class popupActivity extends AppCompatActivity {
     }
 
     private void setPopup(int SID, String medicine, String quantity, Integer hour, Integer minute, Integer mon, Integer tues, Integer wed, Integer thurs, Integer fri, Integer sat, Integer sun) {
-        TextView med = findViewById(R.id.popup_medicine);
+        TextView med = findViewById(R.id.popup_box);
         med.setText(medicine);
 
         TextView quan = findViewById(R.id.popup_quantity);
